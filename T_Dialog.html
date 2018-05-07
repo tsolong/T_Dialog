@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>T_Dialog Demo</title>
+		<link type="text/css" rel="stylesheet" href="T_Dialog.css" />
+	</head>
+
+	<body>
+
+		<h1>T_Dialog Demo</h1>
+
+		<p><button>打开多个对话框</button></p>
+
+		<br>
+
+		<p><button>打开带“遮罩层”的对话框</button></p>
+
+		<br>
+
+		<p><button>打开单个对话框</button></p>
+		<p><button>关闭单个对话框</button></p>
+
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="T_Dialog.js"></script>
+		<script type="text/javascript">
+            $(function() {
+                $("button:eq(0)").click(function() {
+
+                    T_Dialog.queue({
+                        "type" : "alert",
+                        "title" : "系统提示",
+                        "msg" : "请输入您的用户名",
+                        "left" : "250",
+                        "top" : "120",
+                        "fade" : true,
+                        "mask" : false
+                    });
+
+                    T_Dialog.queue({
+                        "type" : "warning",
+                        "title" : "系统警告",
+                        "msg" : "您的密码过于简单，请即时修改",
+                        "left" : "600",
+                        "top" : "120",
+                        "fade" : true,
+                        "mask" : false
+                    });
+
+                    T_Dialog.queue({
+                        "type" : "success",
+                        "title" : "提交成功",
+                        "msg" : "您的数据已成功提交至服务器",
+                        "left" : "250",
+                        "top" : "330",
+                        "fade" : true,
+                        "mask" : false
+                    });
+
+                    T_Dialog.queue({
+                        "type" : "error",
+                        "title" : "系统错误",
+                        "msg" : "您请求的数据加载出错，请重试",
+                        "left" : "600",
+                        "top" : "330",
+                        "fade" : true,
+                        "mask" : false
+                    });
+
+                });
+
+                $("button:eq(1)").click(function () {
+
+                    T_Dialog.queue({
+                        "type" : "confirm",
+                        "title" : "系统确认",
+                        "msg" : "您确认要删除这些数据吗？",
+                        "text" : {
+                            "close" : "Close",
+                            "confirm" : "Confirm",
+                            "cancel" : "Cancel"
+                        },
+                        "width" : "500",
+                        "left" : "center",
+                        "top" : "center",
+                        "fade" : true,
+                        "callBack" : function(button) {
+                            if (button == "close") {
+                                new T_Dialog({
+                                    "msg" : "您点击了关闭图标",
+                                    "fade" : true
+                                });
+                            } else if (button == "confirm") {
+                                new T_Dialog({
+                                    "msg" : "您选择了确定按钮",
+                                    "fade" : true
+                                });
+                            } else if (button == "cancel") {
+                                new T_Dialog({
+                                    "msg" : "您选择了取消按钮",
+                                    "fade" : true
+                                });
+                            } else {
+                                new T_Dialog({
+                                    "type" : "error",
+                                    "msg" : "关闭对话框的事件来源未知",
+                                    "fade" : true
+                                });
+                            }
+                        }
+                    });
+
+                });
+
+                var myDialog = null;
+                $("button:eq(2)").click(function() {
+                    myDialog = new T_Dialog({
+                        "type" : "confirm",
+                        "title" : "myDialog",
+                        "msg" : "您确认要删除这些数据吗？",
+                        "fade" : true,
+                        "mask" : false,
+                        "callBack" : function(button) {
+                            if (button == "close") {
+                                new T_Dialog({
+                                    "msg" : "您点击了关闭图标",
+                                    "fade" : true
+                                });
+                            } else if (button == "confirm") {
+                                new T_Dialog({
+                                    "msg" : "您选择了确定按钮",
+                                    "fade" : true
+                                });
+                            } else if (button == "cancel") {
+                                new T_Dialog({
+                                    "msg" : "您选择了取消按钮",
+                                    "fade" : true
+                                });
+                            } else {
+                                new T_Dialog({
+                                    "type" : "error",
+                                    "msg" : "关闭对话框的事件来源未知",
+                                    "fade" : true
+                                });
+                            }
+                        }
+                    });
+                });
+
+                $("button:eq(3)").click(function() {
+                    if (myDialog != null) {
+                        myDialog.close();
+                    }
+                });
+
+            })
+		</script>
+
+	</body>
+</html>
